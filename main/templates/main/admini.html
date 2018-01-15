@@ -1,0 +1,89 @@
+{% extends "main/main.html" %} {% block body_block %} {%load staticfiles %}
+<style>
+    .title {
+        height: 10%;
+        color: #9b82ff;
+    }
+    
+    .panel {
+        width: 90%;
+        margin-left: 5%;
+        background: linear-gradient(to bottom right, #e6e0ff, #d1c6ff);
+    }
+    
+    .nbar {
+        margin-top: 0px;
+    }
+    
+    .forms {
+        margin: 50px;
+        padding: 2%;
+        background-color: white;
+    }
+    
+    .nb {
+        background: linear-gradient(to bottom right, #e6e0ff, white);
+    }
+    
+    td {
+        padding: 5px;
+    }
+    
+    .add {
+        background-color: green;
+        color: rgba(255, 255, 255, .5);
+        height: 30px;
+        width: 100px;
+        border: none;
+    }
+    
+    .add:hover {
+        color: white;
+        background: linear-gradient(green, #3cff63);
+        transition: .15s;
+        transform: scale(1.1, 1.1);
+    }
+    
+    .fieldadd {
+        background: white;
+        height: 30px;
+        width: 50%;
+    }
+    
+    .s {
+        width: 30%;
+    }
+    
+    .xl {
+        height: 300px;
+        width: 80%;
+    }
+</style>
+<div id="admin_main" class="display container-fluid">
+    <div class="row under">
+        <div class="col-lg-12 col-md-12 col-sl-12 col-xs-12 container under">
+            <div class="panel container-fluid">
+                <h3>New Post</h3>
+                <hr>
+                <p>
+                    <form action="" method="POST" name="NewPost">
+                        {{add.as_p}} {%csrf_token%}
+
+                        <input type="submit" name="Add" class="add" value="ADD">
+
+                    </form>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row under">
+        <div class="col-lg-12 col-md-12 col-sl-12 col-xs-12 container under">
+            <div class="panel container-fluid">
+                <h3>Data Base</h3>
+                <hr>
+                <p>sdms</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

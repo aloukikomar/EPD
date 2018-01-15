@@ -1,0 +1,75 @@
+{% extends "main/main.html" %} {% block body_block %} {%load staticfiles %}
+<style>
+    .title {
+        height: 10%;
+        color: #9b82ff;
+    }
+    
+    .panels {
+        height: 600px;
+        overflow: scroll;
+        background: linear-gradient(to bottom right, #e6e0ff, #d1c6ff);
+    }
+    
+    .notices {
+        width: 90%;
+        padding: 2%;
+        margin-left: 5%;
+    }
+    
+    .notice {
+        background: white;
+        height: 5%;
+        width: 100%;
+        padding: 2%;
+        display: block;
+        border: 1px solid rgb(85, 85, 85);
+        box-shadow: 0px 5px 5px rgb(133, 133, 133);
+    }
+    
+    .notice:hover {
+        background-color: rgb(240, 240, 240);
+        background: white;
+        transition: .15s;
+        transform: scale(1.05, 1.05);
+    }
+    
+    .noticedis {
+        width: 98%;
+        margin-left: 1%;
+        display: none;
+        background-color: rgb(255, 253, 238);
+        padding: 5%;
+        border: 2px solid gray;
+        border-radius: 0px 5px;
+    }
+    
+    .date {
+        float: right;
+    }
+</style>
+<div id="notification_main" class="display container-fluid">
+    <div class="row under">
+        <div class="col-lg-12 col-md-12 col-sl-12 col-xs-12 container under">
+            <div class="panels container-fluid">
+                <h1>Notification</h1>
+                <hr>
+                <div class="notices">
+                    {% for Notification in object_list %}
+                    <div class="notice" onclick="{% for Notification in object_list %}document.getElementById('{{Notification.id}}').style.display='none';{% endfor %}document.getElementById('{{Notification.id}}').style.display='block';">
+                        <div class="date"> {{Notification.Date|date:"d-m-Y" }}</div>
+                        <div class="from">
+                            From:{{Notification.UserName}}&nbsp&nbsp&nbsp&nbspRoll No. :{{Notification.Roll}}
+                        </div>
+                    </div>
+                    <div class="noticedis" id="{{Notification.id}}">
+                        {{Notification.Message}}
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends "main/main.html" %} {% block body_block %} {%load staticfiles %}
+<style>
+    .title {
+        height: 10%;
+        color: rgb(75, 0, 255);
+    }
+    
+    .panels {
+        height: 500px;
+        background: linear-gradient(to bottom right, #e6e0ff, #d1c6ff);
+        border-color: #e7e7e7;
+        overflow: scroll;
+    }
+    
+    .posts {
+        font-family: 'Open Sans', sans-serif;
+        background-color: rgb(240, 240, 240);
+        box-shadow: 0px 5px 5px rgb(133, 133, 133);
+        height: 50px;
+        min-width: 300px;
+        padding: 5px;
+        margin: 1px;
+        overflow: hidden;
+    }
+    
+    .posts:hover {
+        transition: .15s;
+        transform: scale(1.05, 1.05);
+        background-color: white;
+        box-shadow: 0px 5px 5px rgb(216, 197, 245);
+    }
+    
+    .disctitle {
+        text-decoration: none;
+        font-size: 20px;
+    }
+    
+    .date {
+        font-size: 15px;
+        float: right;
+    }
+    
+    .disc {
+        font-size: 10px;
+        height: 10px;
+        overflow: hidden;
+    }
+    
+    .discrip {
+        font-family: 'Open Sans', sans-serif;
+        background-color: white;
+        box-shadow: 0px 5px 5px rgb(133, 133, 133);
+        padding: 5px;
+        margin: 1px;
+    }
+    
+    .postdes {
+        display: none;
+        background-color: white;
+        padding: 5%;
+        border: 2px solid gray;
+        border-radius: 5px;
+    }
+    
+    .dishead {
+        width: 100%;
+        padding: 10px;
+        font-size: 20px;
+    }
+    
+    .distitle {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 30px;
+        text-align: center;
+    }
+    
+    .ddate {
+        width: 100%;
+        padding: 10px;
+        font-size: 20px;
+    }
+    
+    .dis {
+        border-collapse: collapse;
+        border: 1px solid black;
+        padding: 5px;
+    }
+</style>
+<div id="viewpanel_main" class="display container-fluid">
+    <div class="row under">
+        <div class="col-lg-5 col-md-5 col-sl-5 col-xs-12 containe under">
+            <div class="panels"> {% for panelpost in object_list %}
+                <h3 class="posts">
+                    <div class="date"> {{panelpost.Date|date:"d-m-Y" }}</div>
+                    {% with "img/Aloukik/"|add:panelpost.Type|add:".jpg" as template %}
+
+
+                    <table>
+                        <tr>
+                            <td><img src="{% static template %}" height="40" width="40" class="img"></td>
+                            <td><a href="#panels" class="disctitle" value="{{panelpost.id}}" onclick="{% for panelpost in object_list %}document.getElementById('{{panelpost.id}}').style.display='none';{% endfor %}document.getElementById('{{panelpost.id}}').style.display='block';">{{ panelpost.Title}}</a>                                <br>
+                                <div class="disc"> {{panelpost.Subject }}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>{% endwith %}
+                </h3>{% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-7 col-sl-7 col-xs-12 container under">
+            <div class="panels" id="details">
+                {% for panelpost in object_list %}
+                <div id="{{panelpost.id}}" class="postdes">
+                    <table class="dishead dis">
+                        <tr>
+                            <td class="dis" width="30%">
+                                From: {{panelpost.Username}}
+                            </td>
+                            <td clas="dis">
+                                To: {{panelpost.Branch}}.
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <div class="distitle">{{panelpost.Title}}</div>
+                    <br>
+                    <div class="date">{{panelpost.Date|date:"d-m-Y" }}</div>
+                    <br><br>
+                    <div class="ddate">
+                        <table class="dishead dis">
+                            <tr>
+                                <td class="dis" width="30%">
+                                    Date and Time:
+                                </td>
+                                <td clas="dis">
+                                    {{panelpost.DDate|date:"d-m-Y : H-m-s" }}
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
+                    <br>
+                    <div class="disbody">
+                        <table class="dishead dis">
+                            <tr>
+                                <td class="dis" width="30%">
+                                    Discription:
+                                </td>
+                                <td class="dis">
+                                    {{panelpost.Subject}}
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <br> {% if panelpost.Markslow12 != 0 %}
+                                <td class="dis" width="30%">
+                                    marks 10 and 12:
+                                </td>
+                                <td class="dis">
+                                    {{panelpost.Markslow12 }}
+                                </td>
+                                {% endif%}
+                            </tr>
+                            <tr>
+                                <br> {% if panelpost.Markslowb != 0 %}
+                                <td class="dis" width="30%">
+                                    marks B.tech:
+                                </td>
+                                <td class="dis">
+                                    {{panelpost.Markslowb }}
+                                </td>
+                                {% endif%}
+                            </tr>
+                            <tr>
+                                {% if panelpost.Pack != 0 %}
+                                <td class="dis" width="30%">
+                                    Packege:
+                                </td>
+                                <td class="dis">
+                                    {{panelpost.Pack }}
+                                </td>
+                                {% endif%}
+                            </tr>
+                            <tr>
+                                {% if panelpost.Training != 0 %}
+                                <td class="dis" width="30%">
+                                    Training period:
+                                </td>
+                                <td class="dis">
+                                    {{panelpost.Training }}
+                                </td>
+                                {% endif%}
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
