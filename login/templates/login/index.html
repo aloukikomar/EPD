@@ -43,7 +43,7 @@
         background-size: 100% 100%;
         background-attachment: fixed;
         margin-bottom: 0px;
-        height: 7%;
+        height: 2%;
         box-shadow: 0px 1px 5px rgb(15, 13, 20);
     }
     
@@ -77,7 +77,10 @@
         height: 100%;
     }
     
-    .sider {}
+    .mess {
+        text-align: center;
+        color: red;
+    }
     
     .row {
         margin: 0px;
@@ -146,7 +149,7 @@
     
     .regs {
         margin-top: 15%;
-        display: none;
+        display: block;
         transition: all 2.5s ease;
     }
     
@@ -160,7 +163,7 @@
 <body>
     <header class="navbar navbar-fixed-top">
         <div id="icon">
-            <img src="{% static 'img/Aloukik/logo.png' %} " height="50" width="50">
+            <img src="{% static 'img/Aloukik/logo2.png' %} " height="50" width="50">
         </div>
         </div>
     </header>
@@ -181,30 +184,9 @@
             </div>
             <div class="col col-lg-4 col-md-4 col-sl-4 col-xs-12 sider">
                 <div class="container-fluid form">
-                    <div id="log" class="logs">
-                        <form action="" name="log">
-                            {{logform.as_p}} {%csrf_token%}
-                            <tr>
-                                <td>
-                                    <input type="submit" value="Login" name="Log" class="login hv">
-                                </td>
-                            </tr>
-                        </form>
+                    {% block body_block%} {% endblock%}
 
-                        <hr>
-                        <button class="register hv" id="trisign" onclick="document.getElementById('reg').style.display='block';document.getElementById('log').style.display='none'; ">Register</button>
 
-                    </div>
-                    <div id="reg" class="regs ">
-
-                        <form method="POST" id="a">
-                            {{regform1.as_p}} {%csrf_token%}
-                            <input type="submit" name="Reg" class="register hv" value="register">
-                        </form>
-                        <hr>
-                        <button class="login hv" id="trisign" onclick="document.getElementById('reg').style.display='none';document.getElementById('log').style.display='block'; ">Login</button>
-
-                    </div>
 
                 </div>
             </div>

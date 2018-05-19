@@ -1,18 +1,239 @@
 {% extends "main/main.html" %} {% block body_block %} {%load staticfiles %}
 <style>
-
+    .row {
+        margin-bottom: 5px;
+    }
+    
+    .panels {
+        height: 500px;
+        background: linear-gradient(to bottom right, #e6e0ff, #d1c6ff);
+        border-color: #e7e7e7;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+    
+    .posts {
+        font-family: 'Open Sans', sans-serif;
+        background-color: rgb(240, 240, 240);
+        box-shadow: 0px 5px 5px rgb(133, 133, 133);
+        height: 40px;
+        min-width: 250px;
+        padding: 3px;
+        padding-left: 12px;
+        margin: 1px;
+        overflow: hidden;
+    }
+    
+    .posts:hover {
+        transition: .15s;
+        transform: scale(1.05, 1.05);
+        background-color: white;
+        color: rgb(174, 0, 255);
+        box-shadow: 0px 5px 5px rgb(216, 197, 245);
+    }
+    
+    .disctitle {
+        display: block;
+        height: 100%;
+        min-width: 200px;
+        text-decoration: none;
+        padding-left: 12px;
+        font-size: 15px;
+    }
+    
+    .date {
+        font-size: 10px;
+        float: right;
+        padding-right: 10px;
+    }
+    
+    .disc {
+        font-size: 9px;
+        height: 9px;
+        padding-left: 12px;
+        overflow: hidden;
+    }
+    
+    .listinta {
+        padding-left: 10%;
+        height: 10%;
+        width: 100%;
+        color: rgb(95, 85, 115);
+    }
+    
+    .listintr {
+        padding: 5px;
+        height: 50px;
+        width: 80%;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .listfields {
+        padding: 1%;
+        height: 20px;
+        width: 20px;
+        background-color: rgba(75, 0, 255, 0.1);
+        color: white;
+        border: none;
+        font-size: 25;
+        font-style: bold;
+    }
+    
+    .ln {
+        width: 80%;
+        min-width: 100px;
+    }
+    
+    .lm {
+        width: 20%;
+        min-width: 50px;
+    }
+    
+    .add {
+        background-color: green;
+        color: rgba(255, 255, 255, .5);
+        height: 30px;
+        width: 100px;
+        border: none;
+    }
+    
+    .add:hover {
+        color: white;
+        background: linear-gradient(green, #3cff63);
+        transition: .15s;
+        transform: scale(1.1, 1.1);
+    }
+    
+    .creatlist {
+        overflow: hidden;
+        height: 100px;
+    }
+    
+    #details {
+        height: 500px;
+        overflow-x: scroll;
+    }
+    
+    .buttons {
+        padding-top: 3%;
+        padding-left: 20%;
+    }
+    
+    .func {
+        margin-top: -11%;
+    }
+    
+    .genl {
+        color: rgb(95, 85, 115);
+        ;
+    }
+    
+    .genl:hover {
+        color: green;
+        transition: .15s;
+        transform: scale(1.1, 1.1);
+    }
+    
+    .deletel {
+        color: rgb(95, 85, 115);
+    }
+    
+    .deletel:hover {
+        color: red;
+        transition: .15s;
+        transform: scale(1.1, 1.1);
+    }
+    
+    .postdes {
+        background-color: white;
+        padding: 5%;
+        min-height: 500px;
+        border: 2px solid gray;
+        border-radius: 5px;
+    }
+    
+    .ths {
+        background-color: rgb(75, 0, 255);
+        width: 300px;
+        color: white;
+        padding: 5px;
+    }
+    
+    .tds {
+        padding: 5px;
+        width: 300px;
+    }
+    
+    .res {
+        color: red;
+        text-align: center;
+    }
 </style>
 <div id="clist_main" class="display container-fluid">
     <div class="row under">
-        <div class="col-lg-12 col-md-12 col-sl-12 col-xs-12 container under">
-            <div class="panels container-fluid">
-                <h1>View list</h1>
-                <hr>
-                <div class="Listq">
+        <div class="col-lg-4 col-md-4 col-sl-4 col-xs-12 container under">
+            <div class="panels">
+                {% for List in object_list %}
+                <div class="posts">
 
+                    <table>
+                        <tr>
+                            <td>
+                                <form action="" method="GET" name="list" id="liform">{%csrf_token%}
+                                    <input type="hidden" value="{{List.id}}" name="genlist">
+                                    <a class="disctitle" value="{{List.ListName}}" onclick="loadlist({{List.id}});">{{ List.ListName}}</a>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="disc"> {{List.Branch }}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="float-right func">
+                        <tr>
+                            <td colspan="2">
+                                <div class="date"> {{List.Date|date:"d-m-Y" }}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="" class="genl" value="{{List.id}}" onclick=""><i class="material-icons">file_download</i></a>
+                            </td>
+                            <td>
+                                <a href="" class="deletel" value="{{List.id}}" onclick=""><i class="material-icons">delete</i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>{% endfor %}
+            </div>
+        </div>
+
+
+        <div class="col-lg-8 col-md-8 col-sl-8 col-xs-12  container under">
+            <div class="panels" id="details">
+                <div class="Listq">
+                    <div id="Listq" class="postdes">
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function loadlist(str) {
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("Listq").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "{% url 'glist'%}" + str, true);
+        xhttp.send();
+    }
+</script>
 {% endblock %}

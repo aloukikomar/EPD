@@ -66,3 +66,62 @@ class Notification(models.Model):
     def __str__(self):
         return self.UserName
 
+class Student(models.Model):
+    cs = 'ComputerScience'
+    it = 'i.t.'
+    ec = 'Electrical'
+    me ='mech'
+    cv ='civil'
+    Al = 'all'
+    branch = (
+        (cs, 'CS'),
+        (it, 'IT'),
+        (ec, 'EC'),
+        (me, 'MECHANICAL'),
+        (cv, 'CIVIL'),
+        (Al, 'ALL'),
+    )
+    Name = models.CharField(max_length=140)
+    rollno =  models.IntegerField(default=0) 
+    Branch = models.CharField(
+        max_length=200,
+        choices=branch,
+        default=Al,
+    )
+    
+    Markslow12 = models.IntegerField(default=0)
+    Markslowc = models.IntegerField(default=0)
+    Markslowb = models.IntegerField(default=0)
+    def __str__(self):
+        return self.Name
+    
+class List(models.Model):
+    cs = 'ComputerScience'
+    it = 'i.t.'
+    ec = 'Electrical'
+    me ='mech'
+    cv ='civil'
+    Al = 'all'
+    branch = (
+        (cs, 'CS'),
+        (it, 'IT'),
+        (ec, 'EC'),
+        (me, 'MECHANICAL'),
+        (cv, 'CIVIL'),
+        (Al, 'ALL'),
+    )
+    Branch = models.CharField(
+        max_length=200,
+        choices=branch,
+        default=Al,
+    )
+    ListName = models.CharField(max_length=140)
+    College = models.CharField(max_length=140, default='Ipec')
+    Date = models.DateTimeField(default=datetime.now(), blank=True)
+
+    Markslow12 = models.IntegerField(default=0)
+    Markslowb = models.IntegerField(default=0)
+    Markslowc = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.ListName

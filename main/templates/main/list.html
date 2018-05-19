@@ -1,0 +1,39 @@
+<div>
+
+    <table>
+        <tr>
+            <th class="ths">
+                Name
+            </th>
+            <th class="ths">
+                Roll no
+            </th>
+            <th class="ths">
+                Branch
+            </th>
+            <th class="ths">
+                Marks 10th
+            </th>
+            <th class="ths">
+                Marks 12th
+            </th>
+            <th class="ths">
+                Marks B.tech
+            </th>
+            {%if listid.0 is none %}
+            <tr>
+                <td colspan="6">
+                    <div class="res">No such student</div>
+                </td>
+            </tr>
+            {%endif%}
+        </tr> {% for Student in listid %}
+        <tr>
+            {%for data in Student %}
+            <td class="tds">
+                {{ data }}
+            </td>
+            {%endfor%}
+        </tr> {%endfor%}
+    </table>
+</div>

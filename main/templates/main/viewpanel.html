@@ -10,15 +10,17 @@
         background: linear-gradient(to bottom right, #e6e0ff, #d1c6ff);
         border-color: #e7e7e7;
         overflow: scroll;
+        overflow-x: hidden;
     }
     
     .posts {
         font-family: 'Open Sans', sans-serif;
         background-color: rgb(240, 240, 240);
         box-shadow: 0px 5px 5px rgb(133, 133, 133);
-        height: 50px;
+        height: 40px;
         min-width: 300px;
-        padding: 5px;
+        padding: 3px;
+        padding-left: 12px;
         margin: 1px;
         overflow: hidden;
     }
@@ -32,17 +34,21 @@
     
     .disctitle {
         text-decoration: none;
-        font-size: 20px;
+        padding-left: 12px;
+        font-size: 15px;
     }
     
     .date {
-        font-size: 15px;
+        font-size: 10px;
         float: right;
+        padding-right: 12px;
     }
     
     .disc {
-        font-size: 10px;
-        height: 10px;
+        font-size: 9px;
+        width: 50%;
+        height: 9px;
+        padding-left: 12px;
         overflow: hidden;
     }
     
@@ -57,6 +63,7 @@
     .postdes {
         display: none;
         background-color: white;
+        min-height: 500px;
         padding: 5%;
         border: 2px solid gray;
         border-radius: 5px;
@@ -87,26 +94,66 @@
         border: 1px solid black;
         padding: 5px;
     }
+    
+    .func {
+        margin-top: -8%;
+    }
+    
+    .mail {
+        color: rgb(95, 85, 115);
+        ;
+    }
+    
+    .mail:hover {
+        color: green;
+        transition: .15s;
+        transform: scale(1.1, 1.1);
+    }
+    
+    .deletel {
+        color: rgb(95, 85, 115);
+    }
+    
+    .deletel:hover {
+        color: red;
+        transition: .15s;
+        transform: scale(1.1, 1.1);
+    }
 </style>
 <div id="viewpanel_main" class="display container-fluid">
     <div class="row under">
         <div class="col-lg-5 col-md-5 col-sl-5 col-xs-12 containe under">
             <div class="panels"> {% for panelpost in object_list %}
-                <h3 class="posts">
-                    <div class="date"> {{panelpost.Date|date:"d-m-Y" }}</div>
+                <div class="posts">
+
                     {% with "img/Aloukik/"|add:panelpost.Type|add:".jpg" as template %}
 
 
                     <table>
                         <tr>
-                            <td><img src="{% static template %}" height="40" width="40" class="img"></td>
+                            <td><img src="{% static template %}" height="30" width="30" class="img img-circle"></td>
                             <td><a href="#panels" class="disctitle" value="{{panelpost.id}}" onclick="{% for panelpost in object_list %}document.getElementById('{{panelpost.id}}').style.display='none';{% endfor %}document.getElementById('{{panelpost.id}}').style.display='block';">{{ panelpost.Title}}</a>                                <br>
                                 <div class="disc"> {{panelpost.Subject }}
                                 </div>
                             </td>
                         </tr>
+                    </table>
+                    <table class="float-right func">
+                        <tr>
+                            <td colspan="2">
+                                <div class="date"> {{panelpost.Date|date:"d-m-Y" }}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="" class="mail" value="{{List.id}}" onclick=""><i class="material-icons">mail_outline</i></a>
+                            </td>
+                            <td>
+                                <a href="" class="deletel" value="{{List.id}}" onclick=""><i class="material-icons">delete</i></a>
+                            </td>
+                        </tr>
                     </table>{% endwith %}
-                </h3>{% endfor %}
+                </div>{% endfor %}
             </div>
         </div>
         <div class="col-lg-7 col-md-7 col-sl-7 col-xs-12 container under">

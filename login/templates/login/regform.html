@@ -1,0 +1,13 @@
+{% extends "login/index.html" %} {% block body_block %} {%load staticfiles %}
+
+<div id="reg" class="regs ">
+
+    <form method="POST" id="a">
+        {{regform1.as_p}} {%csrf_token%}
+        <input type="submit" name="Reg" class="register hv" value="register">
+    </form>
+
+
+
+</div>
+{% endblock %}

@@ -9,6 +9,7 @@
         width: 90%;
         margin-left: 5%;
         background: linear-gradient(to bottom right, #e6e0ff, #d1c6ff);
+        min-width: 200px;
     }
     
     .nbar {
@@ -25,12 +26,12 @@
         background: linear-gradient(to bottom right, #e6e0ff, white);
     }
     
-    td {
+    .tdt {
         padding: 5px;
     }
     
     .add {
-        background-color: green;
+        background-color: rgb(75, 0, 255);
         color: rgba(255, 255, 255, .5);
         height: 30px;
         width: 100px;
@@ -39,49 +40,99 @@
     
     .add:hover {
         color: white;
-        background: linear-gradient(green, #3cff63);
+        background: linear-gradient(rgb(75, 0, 255), #ff3cae);
         transition: .15s;
         transform: scale(1.1, 1.1);
     }
     
     .fieldadd {
-        background: white;
+        margin: 5px;
+        float: center;
+        padding: .5%;
         height: 30px;
-        width: 50%;
+        width: 30px;
+        background-color: rgba(75, 0, 255, 0.1);
+        color: rgba(75, 0, 255, 0.9);
+        border: none;
+        font-size: 25;
+        font-style: bold;
     }
     
     .s {
-        width: 30%;
+        width: 80%;
+    }
+    
+    .l {
+        width: 180%;
     }
     
     .xl {
         height: 300px;
-        width: 80%;
+        width: 180%;
+    }
+    
+    .form {
+        display: none;
+        min-width: 100%;
+        overflow: scroll;
+        overflow-y: hidden;
+        padding: 10px;
+    }
+    
+    .inform {
+        padding: 50px;
+        background: white;
     }
 </style>
 <div id="admin_main" class="display container-fluid">
     <div class="row under">
         <div class="col-lg-12 col-md-12 col-sl-12 col-xs-12 container under">
             <div class="panel container-fluid">
-                <h3>New Post</h3>
+                <h3 onclick="var x=document.getElementById('fpost');if (x.style.display === 'none') {x.style.display='block';} else { x.style.display = 'none';}">New Post</h3>
                 <hr>
-                <p>
-                    <form action="" method="POST" name="NewPost">
-                        {{add.as_p}} {%csrf_token%}
+                <div class="form" id="fpost">
+                    <div class="inform">
+                        <form action="" method="POST" name="NewPost">
+                            <table>
+                                {{addp.as_table}} {%csrf_token%}
+                            </table>
+                            <input type="submit" name="Addp" class="add" value="ADD">
 
-                        <input type="submit" name="Add" class="add" value="ADD">
+                        </form>
+                    </div>
 
-                    </form>
-                </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sl-12 col-xs-12 container under">
+            <div class="panel container-fluid">
+                <h3 onclick="var x=document.getElementById('flist');if (x.style.display === 'none') {x.style.display='block';} else { x.style.display = 'none';}">New List</h3>
+                <hr>
+                <div class="form" id="flist">
+                    <div class="inform">
+                        <form action="" method="POST" name="NewList">
+                            <table>
+                                {{addl.as_table}} {%csrf_token%}
+                            </table>
+                            <input type="submit" name="Addl" class="add" value="ADD">
+
+                        </form>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
     <div class="row under">
         <div class="col-lg-12 col-md-12 col-sl-12 col-xs-12 container under">
             <div class="panel container-fluid">
-                <h3>Data Base</h3>
+                <h3 onclick="var x=document.getElementById('fdb');if (x.style.display === 'none') {x.style.display='block';} else { x.style.display = 'none';}">Data Base</h3>
                 <hr>
-                <p>sdms</p>
+                <div class="form" id="fdb">
+                    <div class="inform">
+                        sdms
+                    </div>
+                </div>
             </div>
         </div>
     </div>

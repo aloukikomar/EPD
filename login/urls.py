@@ -3,5 +3,7 @@ from login import views
 
 
 urlpatterns =[
-    url(r'^login/', views.landing , name='landing')]
+    url(r'^/', views.landing , name='landing'),
+    url(r'^login/', views.landing, name='landing'),
+    url(r'^reg/', views.reg, name='reg')]
 

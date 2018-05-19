@@ -1,0 +1,23 @@
+fcu:5
+fsr:90
+goal based:1 
+ral:4
+
+pvs/tps
+    max target for page view per second 
+    eg 800 brings down big sites
+    page vs transaction:
+        multiple pages in transaction 
+fsr 
+ral
+    REPLay accesc log 
+    using ns/no
+
+
+keyword
+{always caps}
+    global
+        S_TYPE
+
+    group based
+        G_PAGE_THINK_TIME
